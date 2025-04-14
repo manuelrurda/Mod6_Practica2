@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Mod6_Practica2</string>
+    <string name="error_server_error">Server error</string>
+    <string name="error_network_error">Network error</string>
+    <string name="error_unexpected_error">Unexpected error\n</string>
+    <string name="description_car">Car image</string>
+    <string name="price">$%1$.2f</string>
+</resources>
