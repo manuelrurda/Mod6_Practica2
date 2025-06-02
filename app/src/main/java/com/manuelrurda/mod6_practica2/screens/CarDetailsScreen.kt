@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
@@ -21,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -35,6 +37,7 @@ import com.manuelrurda.mod6_practica2.viewmodels.CarsViewModel
 import com.manuelrurda.mod6_practica2.viewmodels.UiState
 import com.manuelrurda.mod6_practica2.views.ErrorCard
 import com.manuelrurda.mod6_practica2.views.LoadingAnimation
+import com.manuelrurda.mod6_practica2.views.VideoPlayer
 
 @Composable
 fun CarDetailsScreen(id: Int, viewModel: CarsViewModel) {
@@ -110,6 +113,17 @@ private fun CarDetailsCard(car: CarDto){
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp))
             Text(car.color, color = Color.Gray, fontSize = 14.sp)
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(text = stringResource(id = R.string.video, car.price),
+                style = TextStyle(
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp))
+            Spacer(modifier = Modifier.height(5.dp))
+            VideoPlayer(
+                context = LocalContext.current,
+                videoUrl = car.videoUrl,
+                modifier = Modifier.fillMaxWidth()
+            )
         }
     }
 }

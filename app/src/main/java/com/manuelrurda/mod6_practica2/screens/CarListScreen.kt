@@ -1,6 +1,7 @@
 package com.manuelrurda.mod6_practica2.screens
 
-import android.util.Log
+import android.media.AudioAttributes
+import android.media.SoundPool
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -21,13 +22,19 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -46,6 +53,25 @@ import com.manuelrurda.mod6_practica2.views.LoadingAnimation
 @Composable
 fun CarListScreen(viewModel: CarsViewModel, onCarClick: (Int) -> Unit) {
     val carsUiState by viewModel.carsUiState.collectAsState()
+    val context = LocalContext.current
+    val soundPool = remember {
+        SoundPool.Builder()
+            .setMaxStreams(1)
+            .setAudioAttributes(
+                AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_GAME)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .build()
+            )
+            .build()
+    }
+
+    var soundId by remember { mutableIntStateOf(0) }
+
+    LaunchedEffect(Unit) {
+        soundId = soundPool.load(context, R.raw.button, 1)
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize(),
@@ -62,7 +88,10 @@ fun CarListScreen(viewModel: CarsViewModel, onCarClick: (Int) -> Unit) {
             is UiState.Success -> {
                 CarListColumn(
                     data = (carsUiState as UiState.Success).data,
-                    onCarClick = onCarClick
+                    onCarClick = {
+                        soundPool.play(soundId, 1f, 1f, 0, 0, 1f)
+                        onCarClick(it)
+                    }
                 )
             }
             is UiState.Error -> {

@@ -5,4 +5,5 @@
     <string name="error_unexpected_error">Unexpected error\n</string>
     <string name="description_car">Car image</string>
     <string name="price">$%1$.2f</string>
+    <string name="video">Video</string>
 </resources>
