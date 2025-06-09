@@ -1,5 +1,6 @@
 package com.manuelrurda.mod6_practica2.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.manuelrurda.mod6_practica2.data.remote.model.CarDto
@@ -56,6 +57,7 @@ class CarsViewModel: ViewModel() {
                     }
                 }
             }catch (e: IOException){
+                Log.d("CAR ERROR", "getCarById: " + e.message)
                 _carUiState.value = UiState.Error.NetworkError
             }catch (e: Exception){
                 _carUiState.value = UiState.Error.UnexpectedError

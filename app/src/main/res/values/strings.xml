@@ -6,4 +6,25 @@
     <string name="description_car">Car image</string>
     <string name="price">$%1$.2f</string>
     <string name="video">Video</string>
+
+    <string name="login_title">Login</string>
+    <string name="create_account_title">Create Account</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="no_account_prompt">Don\'t have an account? Create Account</string>
+    <string name="have_account_prompt">Already have an account? Login</string>
+    <string name="login_button">Login</string>
+    <string name="create_account_button">Create Account</string>
+    <string name="or_sign_in_with">Or sign in with Google</string>
+    <string name="google_sign_in_button">Sign in with Google</string>
+    <string name="empty_fields_error">Email and password cannot be empty</string>
+    <string name="login_success">Login successful</string>
+    <string name="account_created">Account created successfully</string>
+    <string name="send_email">Send email</string>
+    <string name="recover_pw_title">Recover password</string>
+    <string name="empty_email_error">Please enter your email</string>
+    <string name="email_sent_message">Email sent!</string>
+    <string name="forgot_password">Forgot your password?\n</string>
+    <string name="where_to_buy">Where to buy</string>
+
 </resources>

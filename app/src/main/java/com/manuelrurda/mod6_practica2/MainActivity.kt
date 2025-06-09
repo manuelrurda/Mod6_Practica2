@@ -13,6 +13,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.manuelrurda.mod6_practica2.screens.CarDetailsScreen
 import com.manuelrurda.mod6_practica2.screens.CarListScreen
+import com.manuelrurda.mod6_practica2.screens.ForgotPasswordScreen
+import com.manuelrurda.mod6_practica2.screens.LoginScreen
 import com.manuelrurda.mod6_practica2.ui.theme.Mod6_Practica2Theme
 import com.manuelrurda.mod6_practica2.viewmodels.CarsViewModel
 import kotlinx.serialization.Serializable
@@ -29,8 +31,23 @@ class MainActivity : ComponentActivity() {
                 navController = rememberNavController()
                 NavHost(
                     navController = navController,
-                    startDestination = CarsList
+                    startDestination = Login
                 ){
+                    composable<Login> {
+                        LoginScreen(
+                            onLoginSuccess = {
+                                navController.navigate(CarsList)
+                            },
+                            onForgotPasswordClick = {
+                                navController.navigate(ForgotPassword)
+                            }
+                        )
+                    }
+                    composable<ForgotPassword> {
+                        ForgotPasswordScreen(){
+                            navController.popBackStack()
+                        }
+                    }
                     composable<CarsList> {
                         CarListScreen(viewModel) { id ->
                             navController.navigate(CarDetails(id))
@@ -45,6 +62,12 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
+@Serializable
+object ForgotPassword
+
+@Serializable
+object Login
 
 @Serializable
 object CarsList

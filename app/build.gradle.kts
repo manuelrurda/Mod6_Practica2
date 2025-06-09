@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     kotlin("kapt")
     id("com.google.dagger.hilt.android") version "2.48" apply false
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -43,7 +44,15 @@ android {
 }
 
 dependencies {
-
+    implementation(libs.maps.compose)
+    implementation(libs.play.services.maps)
+    implementation(libs.play.services.auth)
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
+    implementation(libs.firebase.auth)
+    implementation(platform(libs.firebase.bom))
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

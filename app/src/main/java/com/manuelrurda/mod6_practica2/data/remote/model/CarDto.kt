@@ -8,7 +8,9 @@ data class CarDto(
     val color:String,
     val price:Double,
     val imageUrl:String,
-    val videoUrl:String
+    val videoUrl:String,
+    val lat: Double,
+    val lng: Double
 )
 
 fun getEmptyCarModel(): CarDto {
@@ -20,6 +22,8 @@ fun getEmptyCarModel(): CarDto {
         color = "",
         price = 0.0,
         imageUrl = "",
-        videoUrl = ""
+        videoUrl = "",
+        lat = 0.0,
+        lng = 0.0
     )
 }

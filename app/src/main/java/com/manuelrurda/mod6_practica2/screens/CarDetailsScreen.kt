@@ -5,12 +5,15 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Text
@@ -37,6 +40,7 @@ import com.manuelrurda.mod6_practica2.viewmodels.CarsViewModel
 import com.manuelrurda.mod6_practica2.viewmodels.UiState
 import com.manuelrurda.mod6_practica2.views.ErrorCard
 import com.manuelrurda.mod6_practica2.views.LoadingAnimation
+import com.manuelrurda.mod6_practica2.views.MapWithMarker
 import com.manuelrurda.mod6_practica2.views.VideoPlayer
 
 @Composable
@@ -89,7 +93,7 @@ private fun CarDetailsCard(car: CarDto){
             .fillMaxSize()
             .padding(20.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 10.dp)) {
-        Column(modifier = Modifier.padding(15.dp)) {
+        Column(modifier = Modifier.padding(15.dp).verticalScroll(rememberScrollState())) {
             Text(text = car.make,
                 style = TextStyle(
                     fontWeight = FontWeight.Bold,
@@ -122,8 +126,17 @@ private fun CarDetailsCard(car: CarDto){
             VideoPlayer(
                 context = LocalContext.current,
                 videoUrl = car.videoUrl,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth().defaultMinSize(minHeight = 200.dp)
             )
+
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(text = stringResource(id = R.string.where_to_buy),
+                style = TextStyle(
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp))
+            Spacer(modifier = Modifier.height(5.dp))
+            MapWithMarker(latitude = car.lat, longitude = car.lng,
+                modifier = Modifier.fillMaxWidth().height(300.dp))
         }
     }
 }
